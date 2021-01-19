@@ -13,7 +13,7 @@ const name = defaultSettings.title || 'oasis' // page title
 // For example, Mac: sudo npm run
 // You can change the port by the following methods:
 // port = 9528 npm run dev OR npm run dev --port = 9528
-const port = process.env.port || process.env.npm_config_port || 9528 // dev port
+// const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
@@ -30,13 +30,19 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
-    port: port,
-    open: true,
-    overlay: {
-      warnings: false,
-      errors: true
-    },
-    before: require('./mock/mock-server.js')
+    // host: '0.0.0.0',
+    port: 9003,
+    https: false,
+    proxy: {
+      '/api/v1': {
+        target: 'process.env.VUE_APP_BASE_API',
+        secure: false,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api/v1': '/api/v1'
+        }
+      }
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
@@ -59,6 +65,9 @@ module.exports = {
         include: 'initial'
       }
     ])
+    config
+      .when(process.env.NODE_ENV === 'development',
+        config => config.devtool('source-map'))
 
     // when there are many pages, it will cause too many meaningless requests
     config.plugins.delete('prefetch')

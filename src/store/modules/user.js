@@ -1,4 +1,5 @@
-import { login, logout, getInfo } from '@/api/user'
+import { logout } from '@/api/user'
+import { user_login, get_user } from '@/api/users'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
@@ -6,6 +7,7 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
+    userId: '',
     avatar: ''
   }
 }
@@ -24,19 +26,47 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_USERID: (state, userId) => {
+    state.userId = userId
   }
 }
 
 const actions = {
   // user login
-  login({ commit }, userInfo) {
-    const { username, password } = userInfo
+  login({ commit }, params) {
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+      user_login(params).then(response => {
+        // const res = response.data
+        // commit('SET_TOKEN', res.data['token'])
+        // setToken(res.token['token'])
+        const token = response.data.token
+        const userId = response.data.id
+        commit('SET_TOKEN', token)
+        commit('SET_USERID', userId)
+        setToken(token)
         resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  getInfo({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      const params = {
+        'id': state.userId
+      }
+      get_user(params).then(response => {
+        const res = response.datas
+        if (response.status !== 'SUCCEED') {
+          return reject('获取用户信息失败')
+        }
+        const phone = res[0]['phone']
+        const email = res[0]['email']
+        console.log('phone: ', phone)
+        console.log('email: ', email)
+        commit('SET_NAME', 'Super Admin')
+        commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
       }).catch(error => {
         reject(error)
       })
@@ -44,25 +74,25 @@ const actions = {
   },
 
   // get user info
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
-
-        if (!data) {
-          return reject('Verification failed, please Login again.')
-        }
-
-        const { name, avatar } = data
-
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
+  // getInfo({ commit, state }) {
+  //   return new Promise((resolve, reject) => {
+  //     getInfo(state.token).then(response => {
+  //       const { data } = response
+  //
+  //       if (!data) {
+  //         return reject('Verification failed, please Login again.')
+  //       }
+  //
+  //       const { name, avatar } = data
+  //
+  //       commit('SET_NAME', name)
+  //       commit('SET_AVATAR', avatar)
+  //       resolve(data)
+  //     }).catch(error => {
+  //       reject(error)
+  //     })
+  //   })
+  // },
 
   // user logout
   logout({ commit, state }) {
