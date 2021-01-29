@@ -67,6 +67,8 @@ const actions = {
         console.log('email: ', email)
         commit('SET_NAME', 'Super Admin')
         commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
+        console.log('getInfo res :', res)
+        resolve(res)
       }).catch(error => {
         reject(error)
       })
