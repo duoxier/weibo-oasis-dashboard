@@ -100,13 +100,13 @@ export const constantRoutes = [
         path: 'water',
         name: 'Water',
         component: () => import('@/views/water/index'),
-        meta: { title: '水滴', icon: 'table' }
+        meta: { title: '水滴', icon: 'water' }
       },
       {
         path: 'friend',
         name: 'Friend',
         component: () => import('@/views/friend/index'),
-        meta: { title: '好友', icon: 'tree' }
+        meta: { title: '好友', icon: 'friend' }
       }
     ]
   },
