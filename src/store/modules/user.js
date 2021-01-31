@@ -61,13 +61,10 @@ const actions = {
         if (response.status !== 'SUCCEED') {
           return reject('获取用户信息失败')
         }
-        const phone = res[0]['phone']
-        const email = res[0]['email']
-        console.log('phone: ', phone)
-        console.log('email: ', email)
+        // const phone = res[0]['phone']
+        // const email = res[0]['email']
         commit('SET_NAME', 'Super Admin')
         commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
-        console.log('getInfo res :', res)
         resolve(res)
       }).catch(error => {
         reject(error)
