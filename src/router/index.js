@@ -89,6 +89,12 @@ export const constantRoutes = [
             component: () => import('@/views/tools/nearby/dispatch/index'),
             name: 'Dispatch',
             meta: { title: '下发物料' }
+          },
+          {
+            path: 'status',
+            component: () => import('@/views/tools/nearby/status/index'),
+            name: 'Status',
+            meta: { title: '同城动态质量分查询' }
           }
         ]
       },
