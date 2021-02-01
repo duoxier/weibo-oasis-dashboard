@@ -48,10 +48,9 @@
       v-loading="listLoading"
       :data="list"
       border
-      fit
+      fitpx
       highlight-current-row
-      style="width: 100%;"
-      @sort-change="sortChange"
+      style="width: 1191px;"
     >
       <el-table-column
         label="用户ID"
@@ -78,7 +77,7 @@
           <span>{{ row.phone }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" class-name="status-col" width="100">
+      <el-table-column label="状态" class-name="status-col" width="100px">
         <template slot-scope="{row}">
           <el-tag :type="row.status | statusFilter">
             {{ getStatus(row.status) }}
@@ -166,21 +165,21 @@
       </div>
     </el-dialog>
 
-    <el-dialog :visible.sync="dialogPvVisible" title="Reading statistics">
-      <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
-        <el-table-column
-          prop="key"
-          label="Channel"
-        />
-        <el-table-column
-          prop="pv"
-          label="Pv"
-        />
-      </el-table>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogPvVisible = false">Confirm</el-button>
-      </span>
-    </el-dialog>
+<!--    <el-dialog :visible.sync="dialogPvVisible" title="Reading statistics">-->
+<!--      <el-table :data="pvData" border fit highlight-current-row style="width: 100%">-->
+<!--        <el-table-column-->
+<!--          prop="key"-->
+<!--          label="Channel"-->
+<!--        />-->
+<!--        <el-table-column-->
+<!--          prop="pv"-->
+<!--          label="Pv"-->
+<!--        />-->
+<!--      </el-table>-->
+<!--      <span slot="footer" class="dialog-footer">-->
+<!--        <el-button type="primary" @click="dialogPvVisible = false">Confirm</el-button>-->
+<!--      </span>-->
+<!--    </el-dialog>-->
   </div>
 </template>
 
@@ -241,8 +240,7 @@ export default {
         phone: undefined,
         email: undefined,
         status: undefined,
-        type: undefined,
-        sort: '+id'
+        type: undefined
       },
       importanceOptions: [1, 2, 3],
       calendarTypeOptions,
@@ -290,20 +288,6 @@ export default {
     handleFilter() {
       this.listQuery.pageIndex = 1
       this.getList()
-    },
-    sortChange(data) {
-      const { prop, order } = data
-      if (prop === 'id') {
-        this.sortByID(order)
-      }
-    },
-    sortByID(order) {
-      if (order === 'ascending') {
-        this.listQuery.sort = '+id'
-      } else {
-        this.listQuery.sort = '-id'
-      }
-      this.handleFilter()
     },
     resetTemp() {
       this.temp = {
@@ -362,7 +346,13 @@ export default {
           this.editForm.email = tempData.email
           this.editForm.password = tempData.password
           this.editForm.username = tempData.username
-          this.editForm.status = tempData.status
+          if (tempData.status === '可用') {
+            this.editForm.status = 1
+          } else if (tempData.status === '禁用') {
+            this.editForm.status = -1
+          } else {
+            this.editForm.status = tempData.status
+          }
           this.editForm.phone = tempData.phone
           update_user(tempData.id, this.editForm).then(() => {
             // this.list.splice(tempData.id, 1, this.temp)

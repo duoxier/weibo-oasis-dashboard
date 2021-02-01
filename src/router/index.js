@@ -90,23 +90,31 @@ export const constantRoutes = [
   },
 
   {
-    path: '/friend',
+    path: '/tools',
     component: Layout,
-    redirect: '/friend/water',
-    name: 'Friend',
+    redirect: '/tools/nearby',
+    name: 'Tools',
     meta: { title: '测试工具', icon: 'tools' },
     children: [
       {
-        path: 'water',
-        name: 'Water',
-        component: () => import('@/views/water/index'),
-        meta: { title: '水滴', icon: 'water' }
-      },
-      {
-        path: 'friend',
-        name: 'Friend',
-        component: () => import('@/views/friend/index'),
-        meta: { title: '好友', icon: 'friend' }
+        path: 'nearby',
+        name: 'Nearby',
+        component: () => import('@/views/tools/nearby'),
+        meta: { title: '同城', icon: 'el-icon-place' },
+        children: [
+          {
+            path: 'clear-viewer',
+            component: () => import('@/views/tools/nearby/clear-viewer/index'),
+            name: 'Clear-viewer',
+            meta: { title: '清除位置信息' }
+          },
+          {
+            path: 'dispatch',
+            component: () => import('@/views/tools/nearby/dispatch/index'),
+            name: 'Dispatch',
+            meta: { title: '下发物料' }
+          }
+        ]
       }
     ]
   },
