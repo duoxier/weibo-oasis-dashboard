@@ -30,6 +30,7 @@ export function update_user(id, params) {
 export function delete_user(id) {
   return http.delete(`${request}/users/` + id)
 }
+
 // // get请求
 // export function getListAPI(params){
 //   return http.get(`${resquest}/getList.json`,params)

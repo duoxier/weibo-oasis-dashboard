@@ -8,8 +8,8 @@
         class="filter-item"
         @keyup.enter.native="handleFilter"
       />
-      <el-button v-waves class="filter-item" type="primary" @click="handleFilter">
-        清除
+      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+        搜索
       </el-button>
     </div>
   </div>

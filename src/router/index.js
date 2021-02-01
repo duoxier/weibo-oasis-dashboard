@@ -54,7 +54,6 @@ export const constantRoutes = [
       meta: { title: '首页', icon: 'dashboard' }
     }]
   },
-
   {
     path: '/user',
     component: Layout,
@@ -66,29 +65,6 @@ export const constantRoutes = [
       meta: { title: '用户管理', icon: 'user' }
     }]
   },
-
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
   {
     path: '/tools',
     component: Layout,
@@ -113,6 +89,26 @@ export const constantRoutes = [
             component: () => import('@/views/tools/nearby/dispatch/index'),
             name: 'Dispatch',
             meta: { title: '下发物料' }
+          }
+        ]
+      },
+      {
+        path: 'water',
+        name: 'Water',
+        component: () => import('@/views/tools/water'),
+        meta: { title: '水滴', icon: 'water' },
+        children: [
+          {
+            path: 'charge',
+            component: () => import('@/views/tools/water/charge/index'),
+            name: 'charge',
+            meta: { title: '水滴充值' }
+          },
+          {
+            path: 'gather',
+            component: () => import('@/views/tools/water/gather/index'),
+            name: 'gather',
+            meta: { title: '水滴收取' }
           }
         ]
       }
