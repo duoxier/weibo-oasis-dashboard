@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">欢迎: 钟建彬</div>
+    <div class="dashboard-text">欢迎: 钟建彬2</div>
   </div>
 </template>
 
