@@ -70,7 +70,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/tools/nearby',
     name: 'Tools',
-    meta: { title: '测试工具', icon: 'tools' },
+    meta: { title: '绿洲测试工具', icon: 'tools' },
     children: [
       {
         path: 'nearby',
@@ -95,6 +95,12 @@ export const constantRoutes = [
             component: () => import('@/views/tools/nearby/status/index'),
             name: 'Status',
             meta: { title: '同城动态质量分查询' }
+          },
+          {
+            path: 'weibo-position',
+            component: () => import('@/views/tools/nearby/weibo-position/index'),
+            name: 'Weibo-position',
+            meta: { title: '微博常用位置查询' }
           }
         ]
       },
