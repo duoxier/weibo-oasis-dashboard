@@ -34,12 +34,12 @@ module.exports = {
     port: 9003,
     https: false,
     proxy: {
-      '/api/v1': {
-        target: 'process.env.VUE_APP_BASE_API',
+      '/oasis': {
+        target: process.env.VUE_APP_BASE_API,
         secure: false,
         changeOrigin: true,
         pathRewrite: {
-          '^/api/v1': '/api/v1'
+          '^/oasis': ''
         }
       }
     }
