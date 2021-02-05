@@ -104,6 +104,48 @@ export const constantRoutes = [
           }
         ]
       },
+
+      {
+        path: 'likes',
+        name: 'Likes',
+        component: () => import('@/views/tools/likes'),
+        meta: { title: '点赞', icon: 'like' },
+        children: [
+          {
+            path: 'like',
+            component: () => import('@/views/tools/likes/like/index'),
+            name: 'like',
+            meta: { title: '点赞' }
+          },
+          {
+            path: 'unlike',
+            component: () => import('@/views/tools/likes/unlike/index'),
+            name: 'unlike',
+            meta: { title: '取消点赞' }
+          }
+        ]
+      },
+
+      {
+        path: 'friends',
+        name: 'Friends',
+        component: () => import('@/views/tools/follows'),
+        meta: { title: '关注', icon: 'follow' },
+        children: [
+          {
+            path: 'follow',
+            component: () => import('@/views/tools/follows/follow/index'),
+            name: 'follow',
+            meta: { title: '关注' }
+          },
+          {
+            path: 'unfollow',
+            component: () => import('@/views/tools/follows/unfollow/index'),
+            name: 'unfollow',
+            meta: { title: '取消关注' }
+          }
+        ]
+      },
       {
         path: 'water',
         name: 'Water',
