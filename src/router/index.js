@@ -136,7 +136,7 @@ export const constantRoutes = [
             path: 'follow',
             component: () => import('@/views/tools/follows/follow/index'),
             name: 'follow',
-            meta: { title: '关注' }
+            meta: { title: '刷粉' }
           },
           {
             path: 'unfollow',
