@@ -6,3 +6,7 @@ const request = '/api/v1'
 export function clear_viewer(params) {
   return http.get(`${request}/nearby/clear_viewer`, params)
 }
+
+export function weibo_position(params) {
+  return http.get(`${request}/nearby/positions`, params)
+}
