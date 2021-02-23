@@ -15,10 +15,10 @@
 
     <el-dialog title="常用位置" :visible.sync="showDialog">
       <el-table :data="positionArray">
-        <el-table-column prop="time" label="时间" width="150"></el-table-column>
         <el-table-column prop="country" label="国家"></el-table-column>
         <el-table-column prop="province" label="省份"></el-table-column>
         <el-table-column prop="city" label="城市"></el-table-column>
+        <el-table-column prop="time" label="时间" width="150"></el-table-column>
       </el-table>
     </el-dialog>
   </div>
