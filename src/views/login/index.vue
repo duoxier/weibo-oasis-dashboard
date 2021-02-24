@@ -11,7 +11,7 @@
       <el-row>
         <el-button style="width: 350px" size="large" type="primary" @click="sina_login()">请使用新浪口袋扫描登录</el-button>
       </el-row>
-      <el-button type="text" class="other-login" @click="dialogFormVisible = true">外包员工及实习生登录</el-button>
+      <el-button type="text" class="other-login" @click="dialogFormVisible = true">外包员工及实习生登录222</el-button>
       <el-dialog
         title="登录"
         center
